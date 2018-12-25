@@ -1,0 +1,3 @@
+<!ELEMENT message (dishNumber,address)>
+        <!ELEMENT dishNumber (#PCDATA) >
+        <!ELEMENT address (#PCDATA) >
