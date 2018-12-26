@@ -31,6 +31,10 @@ public class Connector {
 
     static void createXML(String XMLFileName, String clientAddress,String clientNumbers) throws ParserConfigurationException, IOException, SAXException, TransformerException {
 
+        File myFile = new File("C:\\Users\\Katty\\Desktop\\message.xml");
+        if(myFile.exists())
+            myFile.delete();
+
         DocumentBuilderFactory factory=DocumentBuilderFactory.newInstance();
         DocumentBuilder builder= factory.newDocumentBuilder();
         Document document= builder.newDocument();
@@ -38,11 +42,6 @@ public class Connector {
         Element message=document.createElement("message");
         Element addressData=document.createElement("addressData");
         Element dishData=document.createElement("dishData");
-
-//    Text text1=document.createTextNode("number");
-//    Text text2=document.createTextNode("address");
-        //dishData.appendChild(text1);
-        //addressData.appendChild(text2);
 
         document.appendChild(message);
         message.appendChild(dishData);
@@ -59,10 +58,10 @@ public class Connector {
 
     static void readXML(String XMLFileName) throws ParserConfigurationException, IOException, SAXException {
 
+
         DocumentBuilderFactory factory = DocumentBuilderFactory.newInstance();
         DocumentBuilder builder = factory.newDocumentBuilder();
         Document document = builder.parse(new File(XMLFileName));
-
 
         SchemaFactory schemaFactoryfactory = SchemaFactory.newInstance(XMLConstants.W3C_XML_SCHEMA_NS_URI);
         Source schemaFile = new StreamSource(new File("fromServer1.xsd"));
@@ -76,7 +75,6 @@ public class Connector {
             e.printStackTrace();
         }
 
-
         Element element = document.getDocumentElement();
         System.out.println(element.getTagName());
         NodeList nodelist = element.getChildNodes();
@@ -84,9 +82,7 @@ public class Connector {
         System.out.println("Your order : ");
         for (int i = 0; i < nodelist.getLength(); i++) {
             if (nodelist.item(i) instanceof Element) {
-                //  System.out.println(((Element) nodelist.item(i)).getTagName()); //выводятся тупо имена тегов
-                //  if(((Element) nodelist.item(i)).hasAttribute("menu"))
-                System.out.println(((Element) nodelist.item(i)).getAttribute("menu"));
+                     System.out.println(((Element) nodelist.item(i)).getAttribute("menu"));
             }
         }
     }
